@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gccore.h>
+
 #include <wiiuse/wpad.h>
 
 #include "FreeMonoBold_ttf.h"
@@ -79,8 +80,7 @@ int main(int argc, char **argv)
         u32 pressed = WPAD_ButtonsDown(0);
 
         GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
-        GRRLIB_Camera3dSettings(0.0f,0.0f,13.0f, 0,1,0, 0,0,0);
-        
+        GRRLIB_Camera3dSettings(0.0f, 0.0f, 13.0f, 0, 1, 0, 0, 0, 0);
 
         model.drawModel();
 

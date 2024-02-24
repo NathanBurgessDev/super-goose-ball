@@ -2,14 +2,17 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include <iostream>
+#include <string.h>
 
 #include "obj.hpp"
 
-ObjModel::ObjModel(std::string& obj)
+ObjModel::ObjModel(std::string &obj)
 {
-    auto ss = std::stringstream{obj};
+    auto f = std::istringstream{obj};
+    std::string line;
 
-    for (std::string line; std::getline(ss, obj, '\n');)
+    while (std::getline(f, line))
     {
         auto firstSpace = line.find(' ');
 
@@ -21,7 +24,7 @@ ObjModel::ObjModel(std::string& obj)
 
         auto type = line.substr(0, firstSpace);
 
-        if (type == "#" || type == "o" || type == "s")
+        if (strcmp(type.c_str(), "#") == 0 || strcmp(type.c_str(), "o") == 0 || strcmp(type.c_str(), "s") == 0)
         {
             continue;
         }
@@ -63,7 +66,7 @@ ObjModel::ObjModel(std::string& obj)
             {
                 std::string vertex1, vertex2, vertex3;
                 unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-                int matches = sscanf(line.c_str(), "%d/%d/%d %d/%d/%d %d/%d/%d", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
+                int matches = sscanf(line.c_str(), "f %d/%d/%d %d/%d/%d %d/%d/%d", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
                 if (matches != 9)
                 {
                     throw "Failed to parse f type";
@@ -82,11 +85,12 @@ ObjModel::ObjModel(std::string& obj)
     }
 }
 
-int ObjModel::drawModel(){
+int ObjModel::drawModel()
+{
     GX_Begin(GX_TRIANGLES, GX_VTXFMT0, 3 * vertexIndices.size());
 
-    GRRLIB_3dMode(0.1,1000,45,0,0);
-    GRRLIB_ObjectView(0,0,0, 0,0,0,1,1,1);
+    GRRLIB_3dMode(0.1, 1000, 45, 0, 0);
+    GRRLIB_ObjectView(0, 0, 0, 0, 0, 0, 1, 1, 1);
     for (int i = 0; i < vertexIndices.size(); i++)
     {
         guVector vertex = verticies[vertexIndices[i]];
@@ -98,7 +102,6 @@ int ObjModel::drawModel(){
         GX_Color1u32(0xFFFFFFFF);
         // GX_TexCoord2f32(uv.u, uv.v);
     }
-
 
     GX_End();
 
