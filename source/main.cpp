@@ -6,6 +6,8 @@
 #include <gccore.h>
 #include <wiiuse/wpad.h>
 
+#include "FreeMonoBold_ttf.h"
+
 #include "obj.hpp"
 
 // static void *xfb = NULL;
@@ -16,6 +18,7 @@ int main(int argc, char **argv)
 {
     GRRLIB_Init();
     WPAD_Init();
+    GRRLIB_ttfFont *myFont = GRRLIB_LoadTTF(FreeMonoBold_ttf, FreeMonoBold_ttf_size);
 
     //---------------------------------------------------------------------------------
 
@@ -56,18 +59,17 @@ int main(int argc, char **argv)
     // This positions the cursor on row 2, column 0
     // we can use variables for this with format codes too
     // e.g. printf ("\x1b[%d;%dH", row, column );
-    printf("\x1b[2;0H");
+    // printf("\x1b[2;0H");
 
     std::ifstream ifs("sd:/apps/HackSocGame/models/goose-new.obj");
-    std::string content( (std::istreambuf_iterator<char>(ifs) ),
-                       (std::istreambuf_iterator<char>()    ) );
+    std::string content((std::istreambuf_iterator<char>(ifs)),
+                        (std::istreambuf_iterator<char>()));
 
-    auto model = ObjModel(content);
-
-    printf("Model parse succeeded!");
+    // auto model = ObjModel(content);
 
     while (1)
     {
+        GRRLIB_PrintfTTF(100, 100, myFont, "Model parse succeeded!", 24, 0xFFFFFFFF);
 
         // Call WPAD_ScanPads each loop, this reads the latest controller states
         WPAD_ScanPads();
@@ -79,12 +81,11 @@ int main(int argc, char **argv)
         // We return to the launcher application via exit
         if (pressed & WPAD_BUTTON_HOME)
             exit(0);
-            
-         GRRLIB_Render();
+
+        GRRLIB_Render();
     }
 
-    
     GRRLIB_Exit(); // Be a good boy, clear the memory allocated by GRRLIB
 
-    exit(0);  // Use exit() to exit a program, do not use 'return' from main()
+    exit(0); // Use exit() to exit a program, do not use 'return' from main()
 }
