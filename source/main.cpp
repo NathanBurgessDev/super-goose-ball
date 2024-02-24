@@ -61,11 +61,11 @@ int main(int argc, char **argv)
     // e.g. printf ("\x1b[%d;%dH", row, column );
     // printf("\x1b[2;0H");
 
-    std::ifstream ifs("sd:/apps/HackSocGame/models/goose-new.obj");
+    std::ifstream ifs("sd:/apps/HackSocGame/models/cube.obj");
     std::string content((std::istreambuf_iterator<char>(ifs)),
                         (std::istreambuf_iterator<char>()));
 
-    // auto model = ObjModel(content);
+    auto model = ObjModel(content);
 
     while (1)
     {
@@ -77,6 +77,12 @@ int main(int argc, char **argv)
         // WPAD_ButtonsDown tells us which buttons were pressed in this loop
         // this is a "one shot" state which will not fire again until the button has been released
         u32 pressed = WPAD_ButtonsDown(0);
+
+        GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+        GRRLIB_Camera3dSettings(0.0f,0.0f,13.0f, 0,1,0, 0,0,0);
+        
+
+        model.drawModel();
 
         // We return to the launcher application via exit
         if (pressed & WPAD_BUTTON_HOME)

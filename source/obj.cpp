@@ -82,6 +82,25 @@ ObjModel::ObjModel(std::string& obj)
     }
 }
 
-ObjModel::drawModel(){
-    
+int ObjModel::drawModel(){
+    GX_Begin(GX_TRIANGLES, GX_VTXFMT0, 3 * vertexIndices.size());
+
+    GRRLIB_3dMode(0.1,1000,45,0,0);
+    GRRLIB_ObjectView(0,0,0, 0,0,0,1,1,1);
+    for (int i = 0; i < vertexIndices.size(); i++)
+    {
+        guVector vertex = verticies[vertexIndices[i]];
+        guVector normal = normals[normalIndices[i]];
+        UV uv = uvs[uvIndices[i]];
+
+        GX_Position3f32(vertex.x, vertex.y, vertex.z);
+        // GX_Normal3f32(normal.x, normal.y, normal.z);
+        GX_Color1u32(0xFFFFFFFF);
+        // GX_TexCoord2f32(uv.u, uv.v);
+    }
+
+
+    GX_End();
+
+    return 0;
 }

@@ -18,5 +18,5 @@ private:
 
 public:
     ObjModel(std::string &name);
-    drawModel();
+    int drawModel();
 };
