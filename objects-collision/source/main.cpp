@@ -2,13 +2,11 @@
 
 #include <stdlib.h>
 #include <wiiuse/wpad.h>
-#include "cube.h"
+#include "objects/cube.h"
 
 int main(int argc, char **argv) {
-    float a = 0;
-    const u32 col[3] = {0xFFFFFFFF, 0xAAAAAAFF, 0x666666FF};
-    int cubeZ = 0;
-    auto cube = Cube(1.0F, col[0]);
+    auto cube = Cube(1.0F, -2, 0, 0);
+    auto cube2 = Cube(1.0F, 2, 0, 0);
 
     // Initialise the Graphics & Video subsystem
     GRRLIB_Init();
@@ -28,13 +26,18 @@ int main(int argc, char **argv) {
         GRRLIB_2dMode();
         WPAD_ScanPads();
         if(WPAD_ButtonsDown(0) & WPAD_BUTTON_HOME) exit(0);
-        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_A) cubeZ++;
-        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_B) cubeZ--;
+        // if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_A) cubeY++;
+        // if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_B) cubeY--;
 
         GRRLIB_3dMode(0.1,1000,45,0,0);
-        GRRLIB_ObjectView(0,0,cubeZ, a,a*2,a*3,1,1,1);
+        GRRLIB_ObjectView(cube.x,cube.y,cube.z,
+                        cube.angX,cube.angY,cube.angZ,
+                        1,1,1);
         cube.draw();
-        a+=0.5f;
+        GRRLIB_ObjectView(cube2.x,cube2.y,cube2.z,
+                        cube2.angX,cube2.angY,cube2.angZ,
+                        1,1,1);
+        cube2.draw();
 
         GRRLIB_Render();  // Render the frame buffer to the TV
     }

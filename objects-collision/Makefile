@@ -17,7 +17,7 @@ include $(DEVKITPPC)/wii_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	source
+SOURCES		:=	source source/objects
 DATA		:=	data
 INCLUDES	:=
 
@@ -107,7 +107,7 @@ clean:
 
 #---------------------------------------------------------------------------------
 run:
-	wiiload $(TARGET).dol
+	dolphin-emu -b $(TARGET).dol
 
 
 #---------------------------------------------------------------------------------
