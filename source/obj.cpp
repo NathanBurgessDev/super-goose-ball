@@ -81,3 +81,7 @@ ObjModel::ObjModel(std::string& obj)
         }
     }
 }
+
+ObjModel::drawModel(){
+    
+}
