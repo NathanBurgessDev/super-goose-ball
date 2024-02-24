@@ -1,4 +1,5 @@
-test.o: /home/joe/Projects/super-goose-ball/grrlib-test/source/test.c \
+test.o: \
+ /home/joe/Projects/super-goose-ball/objects-collision/source/test.cpp \
  /opt/devkitpro/portlibs/wii/include/grrlib.h \
  /opt/devkitpro/libogc/include/gccore.h \
  /opt/devkitpro/libogc/include/ogc/dsp.h \
@@ -68,7 +69,8 @@ test.o: /home/joe/Projects/super-goose-ball/grrlib-test/source/test.c \
  /opt/devkitpro/libogc/include/wiiuse/wpad.h \
  /opt/devkitpro/libogc/include/wiiuse/wiiuse.h \
  /opt/devkitpro/libogc/include/bte/bte.h \
- /opt/devkitpro/libogc/include/bte/bd_addr.h
+ /opt/devkitpro/libogc/include/bte/bd_addr.h \
+ /home/joe/Projects/super-goose-ball/objects-collision/source/cube.h
 /opt/devkitpro/portlibs/wii/include/grrlib.h:
 /opt/devkitpro/libogc/include/gccore.h:
 /opt/devkitpro/libogc/include/ogc/dsp.h:
@@ -139,3 +141,4 @@ test.o: /home/joe/Projects/super-goose-ball/grrlib-test/source/test.c \
 /opt/devkitpro/libogc/include/wiiuse/wiiuse.h:
 /opt/devkitpro/libogc/include/bte/bte.h:
 /opt/devkitpro/libogc/include/bte/bd_addr.h:
+/home/joe/Projects/super-goose-ball/objects-collision/source/cube.h:
