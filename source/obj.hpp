@@ -17,7 +17,5 @@ private:
     std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
 
 public:
-    ObjModel::ObjModel();
-
-    ObjModel::ObjModel(std::string name);
+    ObjModel(std::string &name);
 };

@@ -1,3 +1,6 @@
+#include <fstream>
+#include <string>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <gccore.h>
@@ -5,46 +8,49 @@
 
 #include "obj.hpp"
 
-static void *xfb = NULL;
-static GXRModeObj *rmode = NULL;
+// static void *xfb = NULL;
+// static GXRModeObj *rmode = NULL;
 
 //---------------------------------------------------------------------------------
 int main(int argc, char **argv)
 {
-    //---------------------------------------------------------------------------------
-
-    // Initialise the video system
-    VIDEO_Init();
-
-    // This function initialises the attached controllers
+    GRRLIB_Init();
     WPAD_Init();
 
-    // Obtain the preferred video mode from the system
-    // This will correspond to the settings in the Wii menu
-    rmode = VIDEO_GetPreferredMode(NULL);
+    //---------------------------------------------------------------------------------
 
-    // Allocate memory for the display in the uncached region
-    xfb = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode));
+    // // Initialise the video system
+    // VIDEO_Init();
 
-    // Initialise the console, required for printf
-    console_init(xfb, 20, 20, rmode->fbWidth, rmode->xfbHeight, rmode->fbWidth * VI_DISPLAY_PIX_SZ);
+    // // This function initialises the attached controllers
+    // WPAD_Init();
 
-    // Set up the video registers with the chosen mode
-    VIDEO_Configure(rmode);
+    // // Obtain the preferred video mode from the system
+    // // This will correspon  d to the settings in the Wii menu
+    // rmode = VIDEO_GetPreferredMode(NULL);
 
-    // Tell the video hardware where our display memory is
-    VIDEO_SetNextFramebuffer(xfb);
+    // // Allocate memory for the display in the uncached region
+    // xfb = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode));
 
-    // Make the display visible
-    VIDEO_SetBlack(false);
+    // // Initialise the console, required for printf
+    // console_init(xfb, 20, 20, rmode->fbWidth, rmode->xfbHeight, rmode->fbWidth * VI_DISPLAY_PIX_SZ);
 
-    // Flush the video register changes to the hardware
-    VIDEO_Flush();
+    // // Set up the video registers with the chosen mode
+    // VIDEO_Configure(rmode);
 
-    // Wait for Video setup to complete
-    VIDEO_WaitVSync();
-    if (rmode->viTVMode & VI_NON_INTERLACE)
-        VIDEO_WaitVSync();
+    // // Tell the video hardware where our display memory is
+    // VIDEO_SetNextFramebuffer(xfb);
+
+    // // Make the display visible
+    // VIDEO_SetBlack(false);
+
+    // // Flush the video register changes to the hardware
+    // VIDEO_Flush();
+
+    // // Wait for Video setup to complete
+    // VIDEO_WaitVSync();
+    // if (rmode->viTVMode & VI_NON_INTERLACE)
+    //     VIDEO_WaitVSync();
 
     // The console understands VT terminal escape codes
     // This positions the cursor on row 2, column 0
@@ -52,7 +58,11 @@ int main(int argc, char **argv)
     // e.g. printf ("\x1b[%d;%dH", row, column );
     printf("\x1b[2;0H");
 
-    auto model = ObjModel::ObjModel();
+    std::ifstream ifs("sd:/apps/HackSocGame/models/goose-new.obj");
+    std::string content( (std::istreambuf_iterator<char>(ifs) ),
+                       (std::istreambuf_iterator<char>()    ) );
+
+    auto model = ObjModel(content);
 
     printf("Model parse succeeded!");
 
@@ -69,10 +79,12 @@ int main(int argc, char **argv)
         // We return to the launcher application via exit
         if (pressed & WPAD_BUTTON_HOME)
             exit(0);
-
-        // Wait for the next frame
-        VIDEO_WaitVSync();
+            
+         GRRLIB_Render();
     }
 
-    return 0;
+    
+    GRRLIB_Exit(); // Be a good boy, clear the memory allocated by GRRLIB
+
+    exit(0);  // Use exit() to exit a program, do not use 'return' from main()
 }

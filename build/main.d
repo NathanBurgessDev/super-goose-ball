@@ -1,4 +1,4 @@
-main.o: /home/james/Documents/super-goose-ball/source/main.cpp \
+main.o: /home/cain/Documents/Wii/super-goose-ball/source/main.cpp \
  /opt/devkitpro/libogc/include/gccore.h \
  /opt/devkitpro/libogc/include/ogc/dsp.h \
  /opt/devkitpro/libogc/include/gctypes.h \
@@ -57,7 +57,7 @@ main.o: /home/james/Documents/super-goose-ball/source/main.cpp \
  /opt/devkitpro/libogc/include/wiiuse/wiiuse.h \
  /opt/devkitpro/libogc/include/bte/bte.h \
  /opt/devkitpro/libogc/include/bte/bd_addr.h \
- /home/james/Documents/super-goose-ball/source/obj.hpp \
+ /home/cain/Documents/Wii/super-goose-ball/source/obj.hpp \
  /opt/devkitpro/portlibs/wii/include/grrlib.h \
  /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB__lib.h \
  /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB__inline.h \
@@ -70,7 +70,7 @@ main.o: /home/james/Documents/super-goose-ball/source/main.cpp \
  /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_pixel.h \
  /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_settings.h \
  /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_texSetup.h \
- /home/james/Documents/super-goose-ball/source/uv.hpp
+ /home/cain/Documents/Wii/super-goose-ball/source/uv.hpp
 /opt/devkitpro/libogc/include/gccore.h:
 /opt/devkitpro/libogc/include/ogc/dsp.h:
 /opt/devkitpro/libogc/include/gctypes.h:
@@ -129,7 +129,7 @@ main.o: /home/james/Documents/super-goose-ball/source/main.cpp \
 /opt/devkitpro/libogc/include/wiiuse/wiiuse.h:
 /opt/devkitpro/libogc/include/bte/bte.h:
 /opt/devkitpro/libogc/include/bte/bd_addr.h:
-/home/james/Documents/super-goose-ball/source/obj.hpp:
+/home/cain/Documents/Wii/super-goose-ball/source/obj.hpp:
 /opt/devkitpro/portlibs/wii/include/grrlib.h:
 /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB__lib.h:
 /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB__inline.h:
@@ -142,4 +142,4 @@ main.o: /home/james/Documents/super-goose-ball/source/main.cpp \
 /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_pixel.h:
 /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_settings.h:
 /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_texSetup.h:
-/home/james/Documents/super-goose-ball/source/uv.hpp:
+/home/cain/Documents/Wii/super-goose-ball/source/uv.hpp:

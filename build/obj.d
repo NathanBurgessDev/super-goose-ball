@@ -1,4 +1,5 @@
-obj.o: /home/james/Documents/super-goose-ball/source/obj.cpp \
+obj.o: /home/cain/Documents/Wii/super-goose-ball/source/obj.cpp \
+ /home/cain/Documents/Wii/super-goose-ball/source/obj.hpp \
  /opt/devkitpro/portlibs/wii/include/grrlib.h \
  /opt/devkitpro/libogc/include/gccore.h \
  /opt/devkitpro/libogc/include/ogc/dsp.h \
@@ -64,7 +65,9 @@ obj.o: /home/james/Documents/super-goose-ball/source/obj.cpp \
  /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_handle.h \
  /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_pixel.h \
  /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_settings.h \
- /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_texSetup.h
+ /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_texSetup.h \
+ /home/cain/Documents/Wii/super-goose-ball/source/uv.hpp
+/home/cain/Documents/Wii/super-goose-ball/source/obj.hpp:
 /opt/devkitpro/portlibs/wii/include/grrlib.h:
 /opt/devkitpro/libogc/include/gccore.h:
 /opt/devkitpro/libogc/include/ogc/dsp.h:
@@ -131,3 +134,4 @@ obj.o: /home/james/Documents/super-goose-ball/source/obj.cpp \
 /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_pixel.h:
 /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_settings.h:
 /opt/devkitpro/portlibs/wii/include/grrlib/GRRLIB_texSetup.h:
+/home/cain/Documents/Wii/super-goose-ball/source/uv.hpp:

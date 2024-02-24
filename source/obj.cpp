@@ -1,5 +1,3 @@
-#pragma once
-
 #include <sstream>
 #include <stdio.h>
 #include <string>
@@ -7,9 +5,7 @@
 
 #include "obj.hpp"
 
-ObjModel::ObjModel() {}
-
-ObjModel::ObjModel(std::string obj)
+ObjModel::ObjModel(std::string& obj)
 {
     auto ss = std::stringstream{obj};
 
@@ -84,3 +80,4 @@ ObjModel::ObjModel(std::string obj)
             }
         }
     }
+}
