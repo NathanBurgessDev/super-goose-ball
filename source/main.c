@@ -173,6 +173,8 @@ while(1) {
     // printf("X: %3d", wd->accel.x);
     // printf("Y: %3d", wd->accel.y);
     // printf("Z: %3d", wd->accel.z);
+	char yaw[25];
+	char roll[25];
 	snprintf(yaw, sizeof(yaw), "PITCH: %.02f",wd1->orient.pitch);
 	snprintf(roll, sizeof(roll), "ROLL: %.02f",wd2->orient.roll);
     // printf("\n");
