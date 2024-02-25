@@ -19,7 +19,7 @@ TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data
-# INCLUDES	:=
+INCLUDES	:=
 
 #---------------------------------------------------------------------------------
 # options for code generation
