@@ -9,14 +9,16 @@
 
 class ObjModel
 {
-private:
+public:
+
     std::vector<guVector> verticies;
     std::vector<UV> uvs;
     std::vector<guVector> normals;
 
     std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
 
-public:
     ObjModel(std::string &name);
     int drawModel();
+    int triple32(int x);
+    int lowbias32(int x);
 };

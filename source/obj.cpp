@@ -85,21 +85,75 @@ ObjModel::ObjModel(std::string &obj)
     }
 }
 
+int ObjModel::triple32(int x)
+{
+    x ^= x >> 17;
+    x *= 0xed5ad4bbU;
+    x ^= x >> 11;
+    x *= 0xac4c1b51U;
+    x ^= x >> 15;
+    x *= 0x31848babU;
+    x ^= x >> 14;
+    return x;
+}
+
+int ObjModel::lowbias32(int  x)
+{
+    x ^= x >> 16;
+    x *= 0x7feb352dU;
+    x ^= x >> 15;
+    x *= 0x846ca68bU;
+    x ^= x >> 16;
+    return x;
+}
+
+
 int ObjModel::drawModel()
 {
-    GX_Begin(GX_TRIANGLES, GX_VTXFMT0, 3 * vertexIndices.size());
+    
+    u32 col = lowbias32(0x000000FF);
 
-    GRRLIB_3dMode(0.1, 1000, 45, 0, 0);
-    GRRLIB_ObjectView(0, 0, 0, 0, 0, 0, 1, 1, 1);
-    for (int i = 0; i < vertexIndices.size(); i++)
+    // GRRLIB_3dMode(0.1, 1000, 90, 0, 1);
+    // GRRLIB_ObjectView(0, 0, 0, 0, 0, 0, 1, 1, 1);
+    for (int i = 0; i < vertexIndices.size() - 3 ; i+=3)
     {
-        guVector vertex = verticies[vertexIndices[i]];
-        guVector normal = normals[normalIndices[i]];
-        UV uv = uvs[uvIndices[i]];
+        GX_Begin(GX_TRIANGLES, GX_VTXFMT0, 3);
+        unsigned int vertexIndex0 = vertexIndices[i];
+        unsigned int vertexIndex1 = vertexIndices[i+1];
+        unsigned int vertexIndex2 = vertexIndices[i+2];
 
-        GX_Position3f32(vertex.x, vertex.y, vertex.z);
-        // GX_Normal3f32(normal.x, normal.y, normal.z);
-        GX_Color1u32(0xFFFFFFFF);
+
+        // unsigned int normalIndex0 = normalIndices[i];
+        // unsigned int normalIndex1 = normalIndices[i+1];
+        // unsigned int normalIndex2 = normalIndices[i+2];
+
+        guVector vertex0 = verticies[vertexIndex0 - 1];
+        guVector vertex1 = verticies[vertexIndex1 - 1 ];
+        guVector vertex2 = verticies[vertexIndex2 - 1];
+        
+
+        // guVector normal0 = normals[normalIndex0 - 1];
+        // guVector normal1 = normals[normalIndex1 - 1];
+        // guVector normal2 = normals[normalIndex2 - 1];
+
+
+        // UV uv = uvs[uvIndices[vertexIndex - 1];
+
+        GX_Position3f32(vertex0.x, vertex0.y, vertex0.z);
+        // GX_Normal3f32(normal0.x, normal0.y, normal0.z);
+        col  = lowbias32(col) | 0xFF0000A0;
+        GX_Color1u32(col );
+
+        GX_Position3f32(vertex1.x, vertex1.y, vertex1.z);
+        // GX_Normal3f32(normal1.x, normal1.y, normal1.z);
+        col  = lowbias32(col) | 0xFF0000A0;
+        GX_Color1u32(col );
+
+        GX_Position3f32(vertex2.x, vertex2.y, vertex2.z);
+        // GX_Normal3f32(normal2.x, normal2.y, normal2.z);
+        col  = lowbias32(col) | 0xFF0000A0;
+        GX_Color1u32(col );
+
         // GX_TexCoord2f32(uv.u, uv.v);
     }
 
@@ -107,3 +161,5 @@ int ObjModel::drawModel()
 
     return 0;
 }
+
+
