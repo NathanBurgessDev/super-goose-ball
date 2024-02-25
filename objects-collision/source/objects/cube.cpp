@@ -11,7 +11,7 @@ void Cube::pitch(float amount) {
     // DEBUG
     // this->angX += amount;
 
-    if(amount <= 60 && amount >= -60) {
+    if(amount <= 30 && amount >= -30) {
         this->angX = -amount;
     }
     
