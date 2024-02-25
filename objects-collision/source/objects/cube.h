@@ -9,15 +9,15 @@ class Cube {
     public:
         float size;
 
-        int x;
-        int y;
-        int z;
+        f32 x;
+        f32 y;
+        f32 z;
 
         float angX = 0;
         float angY = 0;
         float angZ = 0;
 
-        Cube(float size, int x, int y, int z);
+        Cube(float size, f32 x, f32 y, f32 z);
         void draw();
         void pitch(float amount);
         void roll(float amount);

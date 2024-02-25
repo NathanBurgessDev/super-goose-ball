@@ -1,6 +1,7 @@
 #include "cube.h"
+#include <math.h>
 
-Cube::Cube(float size, int x, int y, int z) {
+Cube::Cube(float size, f32 x, f32 y, f32 z) {
     this->size = size;
     this->x = x;
     this->y = y;
@@ -11,7 +12,7 @@ void Cube::pitch(float amount) {
     // DEBUG
     // this->angX += amount;
 
-    if(amount <= 30 && amount >= -30) {
+    if(amount <= 30.0F && amount >= -30.0F) {
         this->angX = -amount;
     }
     
@@ -21,7 +22,7 @@ void Cube::roll(float amount) {
     // DEBUG
     // this->angZ += amount;
 
-    if(amount <= 60 && amount >= -60) {
+    if(amount <= 60.0f && amount >= -60.0f) {
         this->angZ = -amount;
     }
 }
@@ -30,7 +31,7 @@ void Cube::yaw(float amount) {
     // DEBUG
     // this->angY += amount;
 
-    if(amount <= 60 && amount >= -60) {
+    if(amount <= 60.0F && amount >= -60.0F) {
         this->angY = -amount;
     }
 }
@@ -94,9 +95,9 @@ void Cube::draw() {
 }
 
 int Cube::getBottomRectX() {
-    return this->x - this->size;
+    return floor(this->x - this->size);
 }
 
 int Cube::getBottomRectY() {
-    return this->z - this->size;
+    return floor(this->z - this->size);
 }

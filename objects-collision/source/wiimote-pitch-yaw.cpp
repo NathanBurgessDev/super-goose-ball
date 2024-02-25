@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 
     GRRLIB_Settings.antialias = true;
 
-    GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+    GRRLIB_SetBackgroundColour(0xFF, 0x00, 0x00, 0xFF);
     GRRLIB_Camera3dSettings(0.0f,0.0f,13.0f, 0,1,0, 0,0,0);
 
     WPAD_SetDataFormat(WPAD_CHAN_0, WPAD_FMT_BTNS_ACC_IR);
@@ -98,6 +98,10 @@ int main(int argc, char **argv) {
             platform.pitch(wd1->orient.pitch);
             platform.roll(wd2->orient.roll);
             cube.x += (1 * (platform.angZ / 100.0F));
+
+            // GRRLIB_2dMode();
+            // char angleText[256];
+            // snprintf(angleText, sizeof(angleText), "1 * (Angle / 100) = %f", 
         }
 
 
