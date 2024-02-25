@@ -31,7 +31,7 @@ int main(){
 	u32 type;
 	VIDEO_Init();
 	PAD_Init();
-	WPAD_Init();
+	WPAGRRLIB_ttfFont *myFont = GRRLIB_LoadTTF(FreeMonoBold_ttf, FreeMonoBold_ttf_size);D_Init();
 	GRRLIB_Init();
 	GRRLIB_ttfFont *myFont = GRRLIB_LoadTTF(FreeMonoBold_ttf, FreeMonoBold_ttf_size);
 	GRRLIB_Settings.antialias = true;

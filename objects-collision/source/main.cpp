@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <wiiuse/wpad.h>
 #include "objects/cube.h"
+#include "FreeMonoBold_ttf.h"
 
 int main(int argc, char **argv) {
     u32 type;
@@ -15,10 +16,10 @@ int main(int argc, char **argv) {
 
     // Initialise the Wiimotes
     WPAD_Init();
-
+    GRRLIB_ttfFont *myFont = GRRLIB_LoadTTF(FreeMonoBold_ttf, FreeMonoBold_ttf_size);
     GRRLIB_Settings.antialias = true;
 
-    GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+    GRRLIB_SetBackgroundColour(0x00, 0xFF, 0x00, 0xFF);
     GRRLIB_Camera3dSettings(0.0f,0.0f,13.0f, 0,1,0, 0,0,0);
 
     WPAD_SetDataFormat(WPAD_CHAN_0, WPAD_FMT_BTNS_ACC_IR);
@@ -83,9 +84,30 @@ int main(int argc, char **argv) {
                             cube2.angX,cube2.angY,cube2.angZ,
                             1,1,1);
             cube2.draw();
-
-            cube.pitch(wd1->orient.pitch);
-            cube.roll(wd1->orient.roll);
+            char yaw[25];
+		    char roll[25];
+            
+            snprintf(roll, sizeof(roll), "ROLL: %.02f",wd2->orient.roll);
+            // printf("\n");
+            printf("ORIENT:");
+            
+            // printf("YAW: %.02f",wd->orient.yaw); // frozen at 0.00
+            printf("ROLL: %.02f",wd2->orient.roll);
+            snprintf(yaw, sizeof(yaw), "PITCH: %.02f",wd1->orient.pitch);
+            GRRLIB_2dMode();
+            if (wd1->orient.pitch<-cube.angX-1 || wd1->orient.pitch>-cube.angX+1){
+                
+                GRRLIB_PrintfTTF(100,110, myFont,yaw,12, 0x002134FF);
+                cube.pitch(wd1->orient.pitch);
+            }
+            if (wd2->orient.roll<-cube.angZ-1 || wd2->orient.roll>-cube.angZ+1){
+                cube.roll(wd2->orient.roll);
+                
+                GRRLIB_PrintfTTF(100,120, myFont,roll,12, 0x002134FF);
+            }
+            //cube.roll(wd2->orient.roll);
+            
+            
         }
 
 
