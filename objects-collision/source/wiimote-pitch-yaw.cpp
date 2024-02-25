@@ -96,7 +96,7 @@ int main(int argc, char **argv) {
 
             platform.pitch(wd1->orient.pitch);
             cube.z += 1 * platform.angX;
-            platform.roll(wd1->orient.roll);
+            platform.roll(wd2->orient.roll);
         }
 
 
