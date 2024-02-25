@@ -7,8 +7,8 @@
 
 int main(int argc, char **argv) {
     u32 type;
-    auto cube = Cube(1.0F, -2, 0, 0);
-    auto cube2 = Cube(1.0F, 2, 0, 0);
+    auto cube = Cube(1.0F, 0, 0, 0);
+    auto platform = Cube(1.0F, 0, -1, 0);
 
     // Initialise the Graphics & Video subsystem
     GRRLIB_Init();
@@ -32,7 +32,6 @@ int main(int argc, char **argv) {
 
     // Loop forever
     while(1) {
-
         GRRLIB_2dMode();
         WPAD_ScanPads();
         if(WPAD_ButtonsDown(0) & WPAD_BUTTON_HOME) exit(0);
@@ -69,6 +68,7 @@ int main(int argc, char **argv) {
         }
 
         GRRLIB_3dMode(0.1,1000,45,0,0);
+        GRRLIB_Camera3dSettings(0.0f,10.0f,30.0f, 0,1,0, 0,-5,0);
 
         if(err == WPAD_ERR_NONE) {
             wd1 = WPAD_Data(WPAD_CHAN_0);
@@ -79,13 +79,24 @@ int main(int argc, char **argv) {
                             cube.angX,cube.angY,cube.angZ,
                             1,1,1);
             cube.draw();
-            GRRLIB_ObjectView(cube2.x,cube2.y,cube2.z,
-                            cube2.angX,cube2.angY,cube2.angZ,
-                            1,1,1);
-            cube2.draw();
+            // Draw platform
+            GRRLIB_ObjectView(platform.x, platform.y, platform.z,
+                            platform.angX, platform.angY, platform.angZ,
+                            5, 0.01, 50);
+            platform.draw();
 
-            cube.pitch(wd1->orient.pitch);
-            cube.roll(wd1->orient.roll);
+            // Gravity
+            if(!GRRLIB_RectInRect(cube.getBottomRectX(), cube.getBottomRectY(),
+                                cube.size * 2, cube.size * 2,
+                                platform.getBottomRectX()*5, platform.getBottomRectY()*50,
+                                (platform.size * 2)*5, (platform.size * 2) * 50
+            )) {
+                cube.y--;
+            }
+
+            platform.pitch(wd1->orient.pitch);
+            cube.z += 1 * platform.angX;
+            platform.roll(wd1->orient.roll);
         }
 
 
