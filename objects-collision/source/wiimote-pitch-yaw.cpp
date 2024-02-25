@@ -101,6 +101,7 @@ int main(int argc, char **argv) {
             platform.roll(wd2->orient.roll);
             cube.x += -(1 * (platform.angZ / 100.0F));
             cube.roll(wd2->orient.roll);
+            cube.y += -(1 * (platform.angX / 100.0F));
 
             // GRRLIB_2dMode();
             // char angleText[256];
