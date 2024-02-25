@@ -18,12 +18,8 @@ include $(DEVKITPPC)/wii_rules
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	source
-<<<<<<< Updated upstream
 DATA		:=	data
-=======
-DATA		:=	data  
->>>>>>> Stashed changes
-INCLUDES	:=
+# INCLUDES	:=
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -36,28 +32,18 @@ LDFLAGS	=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
-<<<<<<< Updated upstream
 # the order can-be/is critical
 #---------------------------------------------------------------------------------
 LIBS	:= -lgrrlib -lpngu `$(PREFIX)pkg-config freetype2 libpng libjpeg --libs` -lfat
 LIBS	+= -lwiiuse
 #LIBS	+= -lmodplay -laesnd
 LIBS	+= -lbte -logc -lm
-=======
-#---------------------------------------------------------------------------------
-LIBS	:=	-lgrrlib -lpngu `$(PREFIX)pkg-config freetype2 libpng libjpeg --libs` -lfat -lwiiuse -lbte -logc -lm
-
->>>>>>> Stashed changes
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
 LIBDIRS	:= $(PORTLIBS)
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
 # rules for different file extensions
@@ -90,17 +76,11 @@ else
 	export LD	:=	$(CXX)
 endif
 
-<<<<<<< Updated upstream
 export OFILES_BIN	:=	$(addsuffix .o,$(BINFILES))
 export OFILES_SOURCES := $(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(sFILES:.s=.o) $(SFILES:.S=.o)
 export OFILES := $(OFILES_BIN) $(OFILES_SOURCES)
 
 export HFILES := $(addsuffix .h,$(subst .,_,$(BINFILES)))
-=======
-export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
-					$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
-					$(sFILES:.s=.o) $(SFILES:.S=.o)
->>>>>>> Stashed changes
 
 #---------------------------------------------------------------------------------
 # build a list of include paths
@@ -113,12 +93,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
 #---------------------------------------------------------------------------------
 # build a list of library paths
 #---------------------------------------------------------------------------------
-<<<<<<< Updated upstream
 export LIBPATHS	:= -L$(LIBOGC_LIB) $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
-=======
-export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) \
-					-L$(LIBOGC_LIB)
->>>>>>> Stashed changes
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 .PHONY: $(BUILD) clean
@@ -126,11 +101,7 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
-<<<<<<< Updated upstream
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-=======
-	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
->>>>>>> Stashed changes
 
 #---------------------------------------------------------------------------------
 clean:
@@ -153,11 +124,8 @@ DEPENDS	:=	$(OFILES:.o=.d)
 $(OUTPUT).dol: $(OUTPUT).elf
 $(OUTPUT).elf: $(OFILES)
 
-<<<<<<< Updated upstream
 $(OFILES_SOURCES) : $(HFILES)
 
-=======
->>>>>>> Stashed changes
 #---------------------------------------------------------------------------------
 # This rule links in binary data with the .jpg extension
 #---------------------------------------------------------------------------------
@@ -166,7 +134,6 @@ $(OFILES_SOURCES) : $(HFILES)
 	@echo $(notdir $<)
 	$(bin2o)
 
-<<<<<<< Updated upstream
 #---------------------------------------------------------------------------------
 # This rule links in binary data with the .png extension
 #---------------------------------------------------------------------------------
@@ -183,8 +150,6 @@ $(OFILES_SOURCES) : $(HFILES)
 	@echo $(notdir $<)
 	$(bin2o)
 
-=======
->>>>>>> Stashed changes
 -include $(DEPENDS)
 
 #---------------------------------------------------------------------------------

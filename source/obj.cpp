@@ -108,10 +108,15 @@ int ObjModel::lowbias32(int  x)
 }
 
 
-int ObjModel::drawModel()
+int ObjModel::drawModel(float a)
 {
-    
+    GRRLIB_3dMode(0.1,1000,45,0,0);
     u32 col = lowbias32(0x000000FF);
+    GRRLIB_ObjectViewBegin();
+    GRRLIB_ObjectViewTrans(5.0f,-2.5f,0);
+    GRRLIB_ObjectViewScale(1,1,1);
+    // GRRLIB_ObjectViewRotate(a,a+1,a+2);
+    GRRLIB_ObjectViewEnd();
 
     // GRRLIB_3dMode(0.1, 1000, 90, 0, 1);
     // GRRLIB_ObjectView(0, 0, 0, 0, 0, 0, 1, 1, 1);

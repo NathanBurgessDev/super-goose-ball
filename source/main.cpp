@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     GRRLIB_Init();
     WPAD_Init();
     GRRLIB_ttfFont *myFont = GRRLIB_LoadTTF(FreeMonoBold_ttf, FreeMonoBold_ttf_size);
-    float a = 0;
+    float a = 1;
 
     //---------------------------------------------------------------------------------
 
@@ -106,10 +106,10 @@ int main(int argc, char **argv)
             exit(0);
 
 
-        GRRLIB_3dMode(0.1,1000,45,0,0);
+        
         // GRRLIB_SetLightAmbient(0x333333FF);
         // GRRLIB_SetLightDiff(0,(guVector){0.0f,2.0f,2.0f},10.0f,1.0f,0xFFFFFFFF);
-        GRRLIB_ObjectView(0,0,0, a,a*2,a*3,1,1,1);
+        // GRRLIB_ObjectView(0,0,0, a,a*2,a*3,1,1,1);
 
         // GX_Begin(GX_QUADS, GX_VTXFMT0, 24);
         //     GX_Position3f32(-1.0f,1.0f,-1.0f);
@@ -184,7 +184,7 @@ int main(int argc, char **argv)
 
         // GX_End();
         a+=0.5f;
-        model.drawModel();
+        model.drawModel(a);
 
         GRRLIB_2dMode();
 

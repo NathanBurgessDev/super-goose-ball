@@ -18,7 +18,7 @@ public:
     std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
 
     ObjModel(std::string &name);
-    int drawModel();
+    int drawModel(float a);
     int triple32(int x);
     int lowbias32(int x);
 };
