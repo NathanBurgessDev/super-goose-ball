@@ -11,21 +11,28 @@ void Cube::pitch(float amount) {
     // DEBUG
     // this->angX += amount;
 
-    this->angX = -amount;
+    if(amount <= 60 && amount >= -60) {
+        this->angX = -amount;
+    }
+    
 }
 
 void Cube::roll(float amount) {
     // DEBUG
     // this->angZ += amount;
 
-    this->angZ = -amount;
+    if(amount <= 60 && amount >= -60) {
+        this->angZ = -amount;
+    }
 }
 
 void Cube::yaw(float amount) {
     // DEBUG
     // this->angY += amount;
 
-    this->angY = -amount;
+    if(amount <= 60 && amount >= -60) {
+        this->angY = -amount;
+    }
 }
 
 void Cube::draw() {

@@ -32,25 +32,36 @@ int main(int argc, char **argv) {
         WPAD_ScanPads();
         if(WPAD_ButtonsDown(0) & WPAD_BUTTON_HOME) exit(0);
 
-        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_DOWN) {
+        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_A) {
             // cube.pitch(1);
             // platform.pitch(1);
-            cube.z--;
+            cube.x--;
+        }
+        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_B) {
+            // cube.pitch(-1);
+            // platform.pitch(-1);
+            cube.x++;
+        }
+
+        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_DOWN) {
+            // cube.pitch(1);
+            platform.pitch(1);
+            // cube.z--;
         }
         if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_UP) {
             // cube.pitch(-1);
-            // platform.pitch(-1);
-            cube.z++;
+            platform.pitch(-1);
+            // cube.z++;
         }
 
         if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_LEFT) {
             // cube.roll(-1);
-            // platform.roll(-1);
+            platform.roll(-1);
             cube.x--;
         }
         if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_RIGHT) {
             // cube.roll(1);
-            // platform.roll(1);
+            platform.roll(1);
             cube.x++;
         }
 

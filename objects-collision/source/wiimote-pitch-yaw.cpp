@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <wiiuse/wpad.h>
 #include "objects/cube.h"
 
@@ -86,17 +87,17 @@ int main(int argc, char **argv) {
             platform.draw();
 
             // Gravity
-            // if(!GRRLIB_RectInRect(cube.getBottomRectX(), cube.getBottomRectY(),
-            //                     cube.size * 2, cube.size * 2,
-            //                     platform.getBottomRectX()*5, platform.getBottomRectY()*50,
-            //                     (platform.size * 2)*5, (platform.size * 2) * 50
-            // )) {
-            //     cube.y--;
-            // }
+            if(!GRRLIB_RectInRect(cube.getBottomRectX(), cube.getBottomRectY(),
+                                cube.size * 2, cube.size * 2,
+                                platform.getBottomRectX()*5, platform.getBottomRectY()*50,
+                                (platform.size * 2)*5, (platform.size * 2) * 50
+            )) {
+                cube.y--;
+            }
 
             platform.pitch(wd1->orient.pitch);
-            // cube.z += 1 * platform.angX;
             platform.roll(wd2->orient.roll);
+            cube.x += 1 * fabs(platform.angZ);
         }
 
 
