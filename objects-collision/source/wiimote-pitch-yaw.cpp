@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
         }
 
         GRRLIB_3dMode(0.1,1000,45,0,0);
-        GRRLIB_Camera3dSettings(0.0f,10.0f,30.0f, 0,1,0, 0,-5,0);
+        GRRLIB_Camera3dSettings(0.0f,20.0f,50.0f, 0,1,0, 0,-7,0);
 
         if(err == WPAD_ERR_NONE) {
             wd1 = WPAD_Data(WPAD_CHAN_0);
@@ -83,21 +83,21 @@ int main(int argc, char **argv) {
             // Draw platform
             GRRLIB_ObjectView(platform.x, platform.y, platform.z,
                             platform.angX, platform.angY, platform.angZ,
-                            5, 0.01, 50);
+                            10, 0.01, 50);
             platform.draw();
 
             // Gravity
             if(!GRRLIB_RectInRect(cube.getBottomRectX(), cube.getBottomRectY(),
                                 cube.size * 2, cube.size * 2,
-                                platform.getBottomRectX()*5, platform.getBottomRectY()*50,
-                                (platform.size * 2)*5, (platform.size * 2) * 50
+                                platform.getBottomRectX()*10, platform.getBottomRectY()*50,
+                                (platform.size * 2)*10, (platform.size * 2) * 50
             )) {
                 cube.y--;
             }
 
             platform.pitch(wd1->orient.pitch);
             platform.roll(wd2->orient.roll);
-            cube.x += (1 * (platform.angZ / 100.0F));
+            cube.x += -(1 * (platform.angZ / 100.0F));
 
             // GRRLIB_2dMode();
             // char angleText[256];
