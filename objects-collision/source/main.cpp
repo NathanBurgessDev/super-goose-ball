@@ -6,9 +6,12 @@
 #include "objects/cube.h"
 
 int main(int argc, char **argv) {
-    u32 type;
-    auto cube = Cube(1.0F, -2, 0, 0);
-    auto cube2 = Cube(1.0F, 2, 0, 0);
+    auto cube = Cube(1.0F, 0, 0, 0);
+    auto platform = Cube(1.0F, 0, -1, 0);
+
+    f32 a = 0;
+    f32 offset = 1.5f;
+    f32 rotpas = 60.0f;
 
     // Initialise the Graphics & Video subsystem
     GRRLIB_Init();
@@ -19,75 +22,65 @@ int main(int argc, char **argv) {
     GRRLIB_Settings.antialias = true;
 
     GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
-    GRRLIB_Camera3dSettings(0.0f,0.0f,13.0f, 0,1,0, 0,0,0);
-
-    WPAD_SetDataFormat(WPAD_CHAN_0, WPAD_FMT_BTNS_ACC_IR);
-    
-    WPAD_SetDataFormat(WPAD_CHAN_1, WPAD_FMT_BTNS_ACC_IR);
-    
-
-	printf("set motion plus on all wiimotes : %d\n", WPAD_SetMotionPlus(-1, 1));
-	WPADData* wd1;
-	WPADData* wd2;
 
     // Loop forever
     while(1) {
+        GRRLIB_Camera3dSettings(0.0f,10.0f,30.0f, 0,1,0, 0,-5,0);
+
 
         GRRLIB_2dMode();
         WPAD_ScanPads();
         if(WPAD_ButtonsDown(0) & WPAD_BUTTON_HOME) exit(0);
-        // if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_A) cubeY++;
-        // if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_B) cubeY--;
 
-        int err = WPAD_Probe(WPAD_CHAN_0, &type);
-        int err2 = WPAD_Probe(WPAD_CHAN_1, &type);
-        switch(err) {
-            case WPAD_ERR_NO_CONTROLLER:
-                printf("WIIMOTE NOT CONNECTED\n");
-                break;
-            case WPAD_ERR_NOT_READY:
-                printf("WIIMOTE NOT READY\n");
-                break;
-            case WPAD_ERR_NONE:
-                printf("WIIMOTE READY\n");
-                break;
-            default:
-                printf("UNK WIIMOTE STATE %d\n", err);
+        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_DOWN) {
+            // cube.pitch(1);
+            // platform.pitch(1);
+            cube.z--;
         }
-        switch(err2) {
-            case WPAD_ERR_NO_CONTROLLER:
-                printf("WIIMOTE NOT CONNECTED\n");
-                break;
-            case WPAD_ERR_NOT_READY:
-                printf("WIIMOTE NOT READY\n");
-                break;
-            case WPAD_ERR_NONE:
-                printf("WIIMOTE READY\n");
-                break;
-            default:
-                printf("UNK WIIMOTE STATE %d\n", err);
+        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_UP) {
+            // cube.pitch(-1);
+            // platform.pitch(-1);
+            cube.z++;
+        }
+
+        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_LEFT) {
+            // cube.roll(-1);
+            // platform.roll(-1);
+            cube.x--;
+        }
+        if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_RIGHT) {
+            // cube.roll(1);
+            // platform.roll(1);
+            cube.x++;
         }
 
         GRRLIB_3dMode(0.1,1000,45,0,0);
 
-        if(err == WPAD_ERR_NONE) {
-            wd1 = WPAD_Data(WPAD_CHAN_0);
-            wd2 = WPAD_Data(WPAD_CHAN_1);
-            printf("DATA ERR: %d",wd1->err);
+        // Draw Cube
+        GRRLIB_ObjectView(cube.x,cube.y,cube.z,
+                        cube.angX,cube.angY,cube.angZ,
+                        1,1,1);
+        // GRRLIB_ObjectViewBegin();
+        // GRRLIB_ObjectViewRotate(0,a*3,0);
+        // GRRLIB_ObjectViewTrans(0,offset,0);
+        // GRRLIB_ObjectViewRotate(a,a*3,a*2+0*rotpas);
+        // GRRLIB_ObjectViewEnd();
+        cube.draw();
 
-            GRRLIB_ObjectView(cube.x,cube.y,cube.z,
-                            cube.angX,cube.angY,cube.angZ,
-                            1,1,1);
-            cube.draw();
-            GRRLIB_ObjectView(cube2.x,cube2.y,cube2.z,
-                            cube2.angX,cube2.angY,cube2.angZ,
-                            1,1,1);
-            cube2.draw();
+        // Draw platform
+        GRRLIB_ObjectView(platform.x, platform.y, platform.z,
+                        platform.angX, platform.angY, platform.angZ,
+                        5, 0.01, 50);
+        platform.draw();
 
-            cube.pitch(wd1->orient.pitch);
-            cube.roll(wd1->orient.roll);
+        // Gravity
+        if(!GRRLIB_RectInRect(cube.getBottomRectX(), cube.getBottomRectY(),
+                            cube.size * 2, cube.size * 2,
+                            platform.getBottomRectX()*5, platform.getBottomRectY()*50,
+                            (platform.size * 2)*5, (platform.size * 2) * 50
+        )) {
+            cube.y--;
         }
-
 
         GRRLIB_Render();  // Render the frame buffer to the TV
     }
