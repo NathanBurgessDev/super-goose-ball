@@ -96,10 +96,10 @@ int main(int argc, char **argv) {
             }
 
             platform.pitch(wd1->orient.pitch);
-            cube.z += -(1 * (platform.angX / 100.0F));
+            cube.z += (1 * (platform.angX / 100.0F));
             cube.pitch(wd1->orient.pitch);
             platform.roll(wd2->orient.roll);
-            cube.x += (1 * (platform.angZ / 100.0F));
+            cube.x += -(1 * (platform.angZ / 100.0F));
             cube.roll(wd2->orient.roll);
 
             // GRRLIB_2dMode();
