@@ -9,23 +9,23 @@ Cube::Cube(float size, int x, int y, int z) {
 
 void Cube::pitch(float amount) {
     // DEBUG
-    this->angX += amount;
+    // this->angX += amount;
 
-    // this->angX = -amount;
+    this->angX = -amount;
 }
 
 void Cube::roll(float amount) {
     // DEBUG
-    this->angZ += amount;
+    // this->angZ += amount;
 
-    // this->angZ = -amount;
+    this->angZ = -amount;
 }
 
 void Cube::yaw(float amount) {
     // DEBUG
-    this->angY += amount;
+    // this->angY += amount;
 
-    // this->angY = -amount;
+    this->angY = -amount;
 }
 
 void Cube::draw() {
